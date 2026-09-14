@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studify</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- SIDEBAR-->
+    <aside class="sidebar">
+
+      <div class="sidebar-logo">
+        <img src="assets/logo.svg" alt="Logo Studify">
+        <div class="sidebar-logo-text">
+          <h1>Studify</h1>
+          <p>Tu estudio, mejor organizado.</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="nav-item active">
+            <a href="#inicio">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Inicio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#mis-apuntes">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Mis Apuntes
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#estadisticas">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Estadísticas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#pomodoro">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Pomodoro
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#tecnicas-estudio">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Técnicas de Estudio
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#ia-asistente">
+              <span class="nav-icon" aria-hidden="true"></span>
+              IA Asistente
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#calendario">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Calendario
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#configuracion">
+              <span class="nav-icon" aria-hidden="true"></span>
+              Configuración
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-user">
+        <img src="assets/user-avatar.png" alt="Foto de perfil del usuario">
+        <div class="sidebar-user-info">
+          <p class="sidebar-user-name">Usuario</p>
+          <p class="sidebar-user-email">estudiante@mail.com</p>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content" id="inicio">
+
+      <!-- Header de bienvenida -->
+      <header class="dashboard-header">
+        <div class="dashboard-header-greeting">
+          <h2>¡Hola, Usuario! 👋</h2>
+          <p>La disciplina de hoy es el éxito de mañana.</p>
+        </div>
+
+        <div class="dashboard-header-actions">
+          <button class="icon-button" aria-label="Notificaciones">🔔</button>
+          <button class="icon-button" aria-label="Cambiar tema">🌙</button>
+          <button class="btn btn-primary" id="btn-nuevo-apunte">
+            + Nuevo Apunte
+          </button>
+        </div>
+      </header>
+
+      <!-- Tarjetas de resumen -->
+      <section class="stats-cards" aria-label="Resumen de actividad">
+
+        <article class="stat-card">
+          <div class="stat-card-icon icon-blue">⏱️</div>
+          <div class="stat-card-body">
+            <p class="stat-card-label">Horas de estudio</p>
+            <p class="stat-card-value">18.5 h</p>
+            <p class="stat-card-period">esta semana</p>
+            <p class="stat-card-trend trend-up">↑ 12% vs semana pasada</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon icon-green">🎯</div>
+          <div class="stat-card-body">
+            <p class="stat-card-label">Sesiones completadas</p>
+            <p class="stat-card-value">14</p>
+            <p class="stat-card-period">esta semana</p>
+            <p class="stat-card-trend trend-up">↑ 8% vs semana pasada</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon icon-orange">🔥</div>
+          <div class="stat-card-body">
+            <p class="stat-card-label">Racha actual</p>
+            <p class="stat-card-value">5 días</p>
+            <p class="stat-card-period">¡Sigue así!</p>
+          </div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-card-icon icon-blue">📁</div>
+          <div class="stat-card-body">
+            <p class="stat-card-label">Apuntes guardados</p>
+            <p class="stat-card-value">24</p>
+            <p class="stat-card-period">documentos</p>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- Contenido central: apuntes, pomodoro, estadísticas -->
+      <section class="dashboard-grid">
+
+        <!-- Mis apuntes recientes -->
+        <article class="panel panel-notes" id="mis-apuntes" aria-label="Apuntes recientes">
+          <div class="panel-header">
+            <h3>Mis Apuntes Recientes</h3>
+            <a href="#mis-apuntes" class="panel-link">Ver todos</a>
+          </div>
+
+          <ul class="notes-list">
+            <li class="note-item">
+              <img src="assets/icon-pdf.svg" alt="Documento PDF" class="note-icon">
+              <div class="note-info">
+                <p class="note-title">Fisiología Humana - Unidad 2</p>
+                <p class="note-meta">Biología · Subido el 21/05/2024</p>
+              </div>
+              <button class="note-options" aria-label="Más opciones">⋯</button>
+            </li>
+            <li class="note-item">
+              <img src="assets/icon-pdf.svg" alt="Documento PDF" class="note-icon">
+              <div class="note-info">
+                <p class="note-title">Cálculo Integral - Resumen</p>
+                <p class="note-meta">Matemática · Subido el 19/05/2024</p>
+              </div>
+              <button class="note-options" aria-label="Más opciones">⋯</button>
+            </li>
+            <li class="note-item">
+              <img src="assets/icon-pdf.svg" alt="Documento PDF" class="note-icon">
+              <div class="note-info">
+                <p class="note-title">Historia Argentina - Siglo XIX</p>
+                <p class="note-meta">Historia · Subido el 18/05/2024</p>
+              </div>
+              <button class="note-options" aria-label="Más opciones">⋯</button>
+            </li>
+            <li class="note-item">
+              <img src="assets/icon-pdf.svg" alt="Documento PDF" class="note-icon">
+              <div class="note-info">
+                <p class="note-title">Química Orgánica - Compuestos</p>
+                <p class="note-meta">Química · Subido el 17/05/2024</p>
+              </div>
+              <button class="note-options" aria-label="Más opciones">⋯</button>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Pomodoro -->
+        <article class="panel panel-pomodoro" id="pomodoro" aria-label="Temporizador Pomodoro">
+          <div class="panel-header">
+            <h3>Pomodoro</h3>
+          </div>
+
+          <div class="pomodoro-timer">
+            <div class="pomodoro-circle">
+              <span class="pomodoro-time">25:00</span>
+              <span class="pomodoro-label">Tiempo de estudio</span>
+            </div>
+          </div>
+
+          <div class="pomodoro-actions">
+            <button class="btn btn-primary" id="btn-iniciar-pomodoro">▶ Iniciar</button>
+            <button class="btn btn-secondary" id="btn-sesiones-pomodoro">☰ Sesiones</button>
+          </div>
+        </article>
+
+        <!-- Columna derecha: estadísticas semanales + técnica recomendada -->
+        <div class="panel-column">
+
+          <article class="panel panel-weekly-stats" id="estadisticas" aria-label="Estadísticas semanales">
+            <div class="panel-header">
+              <h3>Estadísticas Semanales</h3>
+              <select class="panel-select" aria-label="Filtrar período">
+                <option>Esta semana</option>
+                <option>Semana pasada</option>
+                <option>Este mes</option>
+              </select>
+            </div>
+
+            <ul class="weekly-chart" aria-label="Horas de estudio por día">
+              <li class="weekly-chart-bar" style="--valor: 3;"><span class="sr-only">Lunes: 3 horas</span><span class="day-label">Lun</span></li>
+              <li class="weekly-chart-bar" style="--valor: 4.5;"><span class="sr-only">Martes: 4.5 horas</span><span class="day-label">Mar</span></li>
+              <li class="weekly-chart-bar" style="--valor: 5.5;"><span class="sr-only">Miércoles: 5.5 horas</span><span class="day-label">Mié</span></li>
+              <li class="weekly-chart-bar" style="--valor: 4.8;"><span class="sr-only">Jueves: 4.8 horas</span><span class="day-label">Jue</span></li>
+              <li class="weekly-chart-bar" style="--valor: 3.5;"><span class="sr-only">Viernes: 3.5 horas</span><span class="day-label">Vie</span></li>
+              <li class="weekly-chart-bar" style="--valor: 1.5;"><span class="sr-only">Sábado: 1.5 horas</span><span class="day-label">Sáb</span></li>
+              <li class="weekly-chart-bar" style="--valor: 0;"><span class="sr-only">Domingo: 0 horas</span><span class="day-label">Dom</span></li>
+            </ul>
+          </article>
+
+          <article class="panel panel-technique" id="tecnicas-estudio" aria-label="Técnica de estudio recomendada">
+            <div class="panel-header">
+              <h3>Técnica recomendada</h3>
+            </div>
+            <div class="technique-content">
+              <div class="technique-icon">💡</div>
+              <div class="technique-info">
+                <p class="technique-name">Pomodoro</p>
+                <p class="technique-desc">Ideal para mantener el enfoque y mejorar tu productividad.</p>
+                <button class="btn btn-link">Ver más técnicas</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </section>
+
+      <!-- Asistente IA -->
+      <footer class="ai-assistant" id="ia-asistente" aria-label="Asistente IA">
+        <div class="ai-assistant-header">
+          <span class="ai-assistant-icon" aria-hidden="true">✨</span>
+          <div>
+            <h3>Asistente IA</h3>
+            <p>Pregúntame lo que necesites sobre tus temas de estudio...</p>
+          </div>
+        </div>
+
+        <form class="ai-assistant-form">
+          <label for="ai-input" class="sr-only">Escribí tu pregunta</label>
+          <input
+            type="text"
+            id="ai-input"
+            name="ai-input"
+            placeholder="Escribe tu pregunta aquí...">
+          <button type="submit" class="btn btn-primary" aria-label="Enviar pregunta">➤</button>
+        </form>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
