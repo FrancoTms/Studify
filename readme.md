@@ -1,11 +1,9 @@
 # Studify
  
 ## Integrantes
-- Nombre Apellido 1
-- Nombre Apellido 2
-- Nombre Apellido 3
-*(completar con los datos reales del grupo)*
- 
+- Busnelli, Bruno
+- Garcia, Franco Tomas
+
 ## Descripción breve
 Studify es una aplicación web pensada para ayudar a estudiantes a organizar su
 estudio en un solo lugar: seguimiento de horas estudiadas, sesiones completadas,
