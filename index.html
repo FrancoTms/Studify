@@ -3,7 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studify - Tu estudio, mejor organizado</title>
+
+  <!-- ===================== SEO ===================== -->
+  <title>Studify - Organizá tu estudio con Pomodoro, apuntes y estadísticas</title>
+  <meta name="description" content="Studify es la app para organizar tu estudio: gestioná tus apuntes, usá el temporizador Pomodoro, seguí tus estadísticas semanales y consultá a un asistente con IA.">
+  <meta name="keywords" content="studify, estudio, apuntes, pomodoro, estadisticas de estudio, tecnicas de estudio, productividad, estudiantes">
+  <meta name="author" content="Studify">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="canonical" href="https://studify.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Studify - Tu estudio, mejor organizado">
+  <meta property="og:description" content="Organizá tus apuntes, tus tiempos de estudio con Pomodoro y seguí tu progreso semana a semana.">
+  <meta property="og:image" content="img/logo.svg">
+  <meta property="og:locale" content="es_AR">
+
+  <link rel="icon" type="image/svg+xml" href="img/logo.svg">
 
   <!-- Bootstrap 5.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,12 +30,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Estilos propios (variables Bootstrap + ajustes puntuales) -->
+  <!-- Estilos propios -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- NAVBAR MOBILE (solo < lg) -->
+  <!-- ===================== NAVBAR MOBILE (solo < lg) ===================== -->
   <nav class="navbar navbar-light bg-white border-bottom d-lg-none sticky-top">
     <div class="container-fluid">
       <button class="navbar-toggler border-0 shadow-none" type="button"
@@ -30,19 +47,36 @@
         <img src="img/logo.svg" width="30" height="30" alt="">
         Studify
       </a>
-      <button class="btn btn-light rounded-circle" aria-label="Notificaciones">
-        <i class="bi bi-bell"></i>
-      </button>
+      <div class="d-flex gap-1">
+        <div class="dropdown">
+          <button class="btn btn-light rounded-circle position-relative js-notif-btn" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notificaciones">
+            <i class="bi bi-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger js-notif-badge">
+              3<span class="visually-hidden">notificaciones sin leer</span>
+            </span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end p-2 js-notif-menu" style="min-width:260px;">
+            <li class="dropdown-header px-2">Notificaciones</li>
+            <li><a class="dropdown-item small py-2" href="#pomodoro">Tu sesión Pomodoro terminó 🎉</a></li>
+            <li><a class="dropdown-item small py-2" href="#mis-apuntes">Nuevo comentario en "Cálculo Integral"</a></li>
+            <li><a class="dropdown-item small py-2" href="#estadisticas">¡Superaste tu racha de la semana pasada!</a></li>
+          </ul>
+        </div>
+        <button class="btn btn-light rounded-circle js-theme-toggle" type="button" aria-label="Cambiar tema">
+          <i class="bi bi-moon-stars js-theme-icon"></i>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!--  OFFCANVAS: MENÚ EN MOBILE -->
+  <!-- ===================== OFFCANVAS: MENÚ EN MOBILE ===================== -->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarOffcanvasLabel">
     <div class="offcanvas-header border-bottom">
-      <h5 class="offcanvas-title d-flex align-items-center gap-2" id="sidebarOffcanvasLabel">
+      <h2 class="offcanvas-title h5 d-flex align-items-center gap-2 mb-0" id="sidebarOffcanvasLabel">
         <img src="img/logo.svg" width="30" height="30" alt="">
         Studify
-      </h5>
+      </h2>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
     </div>
     <div class="offcanvas-body d-flex flex-column">
@@ -53,8 +87,18 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 text-body" href="#plan-de-hoy">
+            <i class="bi bi-check2-square"></i> Plan de hoy
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link d-flex align-items-center gap-2 text-body" href="#mis-apuntes">
             <i class="bi bi-journal-text"></i> Mis Apuntes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 text-body" href="#proximos-examenes">
+            <i class="bi bi-calendar2-week"></i> Próximos Exámenes
           </a>
         </li>
         <li class="nav-item">
@@ -102,14 +146,14 @@
   <div class="container-fluid">
     <div class="row">
 
-      <!-- SIDEBAR DESKTOP (solo >= lg)  -->
+      <!-- ===================== SIDEBAR DESKTOP (solo >= lg) ===================== -->
       <aside class="col-lg-3 col-xl-2 d-none d-lg-flex flex-column bg-white border-end vh-100 sticky-top p-3">
 
         <div class="d-flex align-items-center gap-2 border-bottom pb-3 mb-3">
           <img src="img/logo.svg" width="40" height="40" alt="Logo Studify">
           <div>
-            <h1 class="h5 mb-0 fw-bold">Studify</h1>
-            <p class="mb-0 text-secondary small">Tu estudio, mejor organizado.</p>
+            <p class="h5 mb-0 fw-bold">Studify</p>
+            <p class="mb-0 text-secondary small">Tu espacio para enfocarte.</p>
           </div>
         </div>
 
@@ -119,9 +163,29 @@
               <i class="bi bi-house-door-fill"></i> Inicio
             </a>
           </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 text-body" href="#plan-de-hoy">
+            <i class="bi bi-check2-square"></i> Plan de hoy
+          </a>
+        </li>
           <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2 text-body" href="#mis-apuntes">
               <i class="bi bi-journal-text"></i> Mis Apuntes
+            </a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 text-body" href="#proximos-examenes">
+            <i class="bi bi-calendar2-week"></i> Próximos Exámenes
+          </a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 text-body js-focus-mode" href="#mi-progreso">
+              <i class="bi bi-stars"></i> Modo Foco
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center gap-2 text-body" href="#mi-progreso">
+              <i class="bi bi-signpost-split"></i> Mi progreso
             </a>
           </li>
           <li class="nav-item">
@@ -165,30 +229,52 @@
         </div>
       </aside>
 
-      <!--  CONTENIDO PRINCIPAL  -->
+      <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
       <main class="col-lg-9 col-xl-10 py-4 px-3 px-md-4" id="inicio">
 
         <!-- Header de bienvenida -->
         <header class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
           <div>
-            <h2 class="fw-bold mb-1">¡Hola, Usuario! 👋</h2>
-            <p class="text-secondary mb-0">La disciplina de hoy es el éxito de mañana.</p>
+            <h1 class="fw-bold mb-1 fs-2">Hola, Usuario. Hoy toca avanzar. ✦</h1>
+            <p class="text-secondary mb-0">No hace falta hacerlo todo hoy. Solo empezar.</p>
           </div>
 
           <div class="d-none d-lg-flex align-items-center gap-2">
-            <button class="btn btn-light rounded-circle" aria-label="Notificaciones">
-              <i class="bi bi-bell"></i>
+            <button class="btn btn-light d-flex align-items-center gap-2 js-focus-mode" type="button">
+              <i class="bi bi-stars"></i> Modo Foco
             </button>
-            <button class="btn btn-light rounded-circle" aria-label="Cambiar tema">
-              <i class="bi bi-moon-stars"></i>
+            <div class="dropdown">
+              <button class="btn btn-light rounded-circle position-relative js-notif-btn" type="button"
+                      data-bs-toggle="dropdown" aria-expanded="false" aria-label="Notificaciones">
+                <i class="bi bi-bell"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger js-notif-badge">
+                  3<span class="visually-hidden">notificaciones sin leer</span>
+                </span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end p-2 js-notif-menu" style="min-width:280px;">
+                <li class="dropdown-header px-2">Notificaciones</li>
+                <li><a class="dropdown-item small py-2" href="#pomodoro">Tu sesión Pomodoro terminó 🎉</a></li>
+                <li><a class="dropdown-item small py-2" href="#mis-apuntes">Nuevo comentario en "Cálculo Integral"</a></li>
+                <li><a class="dropdown-item small py-2" href="#estadisticas">¡Superaste tu racha de la semana pasada!</a></li>
+              </ul>
+            </div>
+            <button class="btn btn-light rounded-circle js-theme-toggle" type="button" aria-label="Cambiar tema">
+              <i class="bi bi-moon-stars js-theme-icon"></i>
             </button>
-            <button class="btn btn-primary d-flex align-items-center gap-2" id="btn-nuevo-apunte">
+            <button class="btn btn-primary d-flex align-items-center gap-2" type="button"
+                    data-bs-toggle="modal" data-bs-target="#modalNuevoApunte">
               <i class="bi bi-plus-lg"></i> Nuevo Apunte
             </button>
           </div>
-          <button class="btn btn-primary d-flex d-lg-none align-items-center gap-2 w-100">
-            <i class="bi bi-plus-lg"></i> Nuevo Apunte
-          </button>
+          <div class="d-flex d-lg-none gap-2 w-100">
+            <button class="btn btn-light border flex-grow-1 js-focus-mode" type="button">
+              <i class="bi bi-stars"></i> Modo Foco
+            </button>
+            <button class="btn btn-primary flex-grow-1" type="button"
+                    data-bs-toggle="modal" data-bs-target="#modalNuevoApunte">
+              <i class="bi bi-plus-lg"></i> Nuevo Apunte
+            </button>
+          </div>
         </header>
 
         <!-- Tarjetas de resumen -->
@@ -202,7 +288,7 @@
                 </span>
                 <div>
                   <p class="text-secondary small mb-1">Horas de estudio</p>
-                  <p class="fs-3 fw-bold mb-0">18.5 h</p>
+                  <p class="fs-3 fw-bold mb-0" id="statHours">18.5 h</p>
                   <p class="text-body-tertiary small mb-1">esta semana</p>
                   <p class="text-success small fw-semibold mb-0"><i class="bi bi-arrow-up-short"></i>12% vs semana pasada</p>
                 </div>
@@ -218,7 +304,7 @@
                 </span>
                 <div>
                   <p class="text-secondary small mb-1">Sesiones completadas</p>
-                  <p class="fs-3 fw-bold mb-0">14</p>
+                  <p class="fs-3 fw-bold mb-0" id="statSessions">14</p>
                   <p class="text-body-tertiary small mb-1">esta semana</p>
                   <p class="text-success small fw-semibold mb-0"><i class="bi bi-arrow-up-short"></i>8% vs semana pasada</p>
                 </div>
@@ -249,7 +335,7 @@
                 </span>
                 <div>
                   <p class="text-secondary small mb-1">Apuntes guardados</p>
-                  <p class="fs-3 fw-bold mb-0">24</p>
+                  <p class="fs-3 fw-bold mb-0" id="statNotes">24</p>
                   <p class="text-body-tertiary small mb-0">documentos</p>
                 </div>
               </div>
@@ -258,20 +344,94 @@
 
         </section>
 
+        <!-- ===================== OBJETIVO DEL DÍA ===================== -->
+        <section class="studify-daily-goal mb-4" aria-label="Objetivo del día">
+          <div class="studify-goal-copy">
+            <span class="studify-eyebrow"><i class="bi bi-bullseye"></i> OBJETIVO DE HOY</span>
+            <h2>Terminar el TP de Programación</h2>
+            <p>Dos tareas completadas. Una última para cerrar el día con progreso real.</p>
+            <div class="studify-goal-progress">
+              <div class="progress">
+                <div class="progress-bar" id="dailyGoalProgress" style="width: 67%"></div>
+              </div>
+              <span id="dailyGoalPercent">67%</span>
+            </div>
+          </div>
+          <div class="studify-goal-action">
+            <div class="studify-goal-ring"><span id="dailyGoalRingText">2/3</span></div>
+            <button class="btn btn-light js-focus-mode"><i class="bi bi-play-fill"></i> Empezar</button>
+          </div>
+        </section>
+
+        <!-- Plan de hoy -->
+        <section class="card shadow-sm border-0 mb-4" id="plan-de-hoy" aria-label="Plan de estudio de hoy">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+              <div>
+                <h2 class="h5 fw-bold mb-1">Tu misión de hoy</h2>
+                <p class="text-secondary small mb-0" id="planDeHoyFecha">Hoy</p>
+              </div>
+              <span class="badge rounded-pill bg-primary-subtle text-primary fs-6 px-3 py-2" id="planDeHoyResumen">
+                0 de 4 completadas
+              </span>
+            </div>
+
+            <div class="progress mb-4" style="height: 10px;" role="progressbar"
+                 aria-label="Progreso del plan de hoy" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar" id="planDeHoyProgressBar" style="width: 0%;"></div>
+            </div>
+
+            <ul class="list-group list-group-flush" id="planDeHoyList">
+              <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                <input class="form-check-input js-plan-check flex-shrink-0" type="checkbox" id="plan-item-1">
+                <label class="flex-grow-1 mb-0 js-plan-label" for="plan-item-1">
+                  <span class="fw-semibold">Matemática</span> — Práctica de derivadas
+                  <span class="text-secondary small d-block">60 min</span>
+                </label>
+                <span class="badge bg-primary-subtle text-primary">Matemática</span>
+              </li>
+              <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                <input class="form-check-input js-plan-check flex-shrink-0" type="checkbox" id="plan-item-2">
+                <label class="flex-grow-1 mb-0 js-plan-label" for="plan-item-2">
+                  <span class="fw-semibold">Biología</span> — Repaso Fisiología Humana
+                  <span class="text-secondary small d-block">45 min</span>
+                </label>
+                <span class="badge bg-danger-subtle text-danger">Biología</span>
+              </li>
+              <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                <input class="form-check-input js-plan-check flex-shrink-0" type="checkbox" id="plan-item-3">
+                <label class="flex-grow-1 mb-0 js-plan-label" for="plan-item-3">
+                  <span class="fw-semibold">Historia</span> — Línea de tiempo Siglo XIX
+                  <span class="text-secondary small d-block">30 min</span>
+                </label>
+                <span class="badge bg-warning-subtle text-warning">Historia</span>
+              </li>
+              <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                <input class="form-check-input js-plan-check flex-shrink-0" type="checkbox" id="plan-item-4">
+                <label class="flex-grow-1 mb-0 js-plan-label" for="plan-item-4">
+                  <span class="fw-semibold">Química</span> — Ejercicios de compuestos orgánicos
+                  <span class="text-secondary small d-block">30 min</span>
+                </label>
+                <span class="badge bg-success-subtle text-success">Química</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
         <!-- Contenido central: apuntes, pomodoro, estadísticas -->
         <section class="row g-3 mb-4">
 
           <!-- Mis apuntes recientes -->
           <div class="col-lg-5">
-            <div class="card shadow-sm border-0 h-100" id="mis-apuntes">
+            <div class="card shadow-sm border-0 h-100" id="apuntes-recientes">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <h3 class="h6 fw-bold mb-0">Mis Apuntes Recientes</h3>
                   <a href="#mis-apuntes" class="small link-primary text-decoration-none">Ver todos</a>
                 </div>
 
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                <ul class="list-group list-group-flush" id="notesList">
+                  <li class="list-group-item d-flex align-items-center gap-3 px-0" data-subject="Biología">
                     <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
                       <i class="bi bi-file-earmark-pdf-fill"></i>
                     </span>
@@ -279,11 +439,11 @@
                       <p class="mb-0 fw-semibold small">Fisiología Humana - Unidad 2</p>
                       <p class="mb-0 text-secondary small">Biología · Subido el 21/05/2024</p>
                     </div>
-                    <button class="btn btn-sm btn-light border-0 text-secondary" aria-label="Más opciones">
-                      <i class="bi bi-three-dots"></i>
+                    <button class="btn btn-sm btn-light border-0 text-secondary js-delete-note" aria-label="Eliminar apunte" title="Eliminar apunte">
+                      <i class="bi bi-trash3"></i>
                     </button>
                   </li>
-                  <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                  <li class="list-group-item d-flex align-items-center gap-3 px-0" data-subject="Matemática">
                     <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
                       <i class="bi bi-file-earmark-pdf-fill"></i>
                     </span>
@@ -291,11 +451,11 @@
                       <p class="mb-0 fw-semibold small">Cálculo Integral - Resumen</p>
                       <p class="mb-0 text-secondary small">Matemática · Subido el 19/05/2024</p>
                     </div>
-                    <button class="btn btn-sm btn-light border-0 text-secondary" aria-label="Más opciones">
-                      <i class="bi bi-three-dots"></i>
+                    <button class="btn btn-sm btn-light border-0 text-secondary js-delete-note" aria-label="Eliminar apunte" title="Eliminar apunte">
+                      <i class="bi bi-trash3"></i>
                     </button>
                   </li>
-                  <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                  <li class="list-group-item d-flex align-items-center gap-3 px-0" data-subject="Historia">
                     <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
                       <i class="bi bi-file-earmark-pdf-fill"></i>
                     </span>
@@ -303,11 +463,11 @@
                       <p class="mb-0 fw-semibold small">Historia Argentina - Siglo XIX</p>
                       <p class="mb-0 text-secondary small">Historia · Subido el 18/05/2024</p>
                     </div>
-                    <button class="btn btn-sm btn-light border-0 text-secondary" aria-label="Más opciones">
-                      <i class="bi bi-three-dots"></i>
+                    <button class="btn btn-sm btn-light border-0 text-secondary js-delete-note" aria-label="Eliminar apunte" title="Eliminar apunte">
+                      <i class="bi bi-trash3"></i>
                     </button>
                   </li>
-                  <li class="list-group-item d-flex align-items-center gap-3 px-0">
+                  <li class="list-group-item d-flex align-items-center gap-3 px-0" data-subject="Química">
                     <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
                       <i class="bi bi-file-earmark-pdf-fill"></i>
                     </span>
@@ -315,11 +475,15 @@
                       <p class="mb-0 fw-semibold small">Química Orgánica - Compuestos</p>
                       <p class="mb-0 text-secondary small">Química · Subido el 17/05/2024</p>
                     </div>
-                    <button class="btn btn-sm btn-light border-0 text-secondary" aria-label="Más opciones">
-                      <i class="bi bi-three-dots"></i>
+                    <button class="btn btn-sm btn-light border-0 text-secondary js-delete-note" aria-label="Eliminar apunte" title="Eliminar apunte">
+                      <i class="bi bi-trash3"></i>
                     </button>
                   </li>
                 </ul>
+
+                <p class="text-secondary small text-center mb-0 mt-2 d-none" id="notesEmptyState">
+                  Todavía no tenés apuntes guardados. ¡Agregá el primero!
+                </p>
               </div>
             </div>
           </div>
@@ -331,65 +495,78 @@
                 <h3 class="h6 fw-bold mb-3">Pomodoro</h3>
 
                 <div class="d-flex justify-content-center py-3">
-                  <div class="pomodoro-circle d-flex flex-column align-items-center justify-content-center">
-                    <span class="fs-3 fw-bold">25:00</span>
-                    <span class="text-secondary small text-center px-2">Tiempo de estudio</span>
+                  <div class="pomodoro-ring d-flex align-items-center justify-content-center" id="pomodoroRing" style="--progress:100;">
+                    <div class="pomodoro-inner d-flex flex-column align-items-center justify-content-center">
+                      <span class="fs-3 fw-bold" id="pomodoroTime">25:00</span>
+                      <span class="text-secondary small text-center px-2" id="pomodoroStatus">Tiempo de estudio</span>
+                    </div>
                   </div>
                 </div>
 
                 <div class="d-flex flex-column gap-2 mt-auto">
-                  <button class="btn btn-primary" id="btn-iniciar-pomodoro">
-                    <i class="bi bi-play-fill"></i> Iniciar
+                  <button class="btn btn-primary" id="btnPomodoroToggle" type="button">
+                    <i class="bi bi-play-fill" id="btnPomodoroToggleIcon"></i>
+                    <span id="btnPomodoroToggleLabel">Iniciar</span>
                   </button>
-                  <button class="btn btn-outline-secondary" id="btn-sesiones-pomodoro">
+                  <button class="btn btn-outline-secondary" type="button"
+                          data-bs-toggle="collapse" data-bs-target="#pomodoroSesiones"
+                          aria-expanded="false" aria-controls="pomodoroSesiones">
                     <i class="bi bi-list-ul"></i> Sesiones
                   </button>
+                  <div class="collapse" id="pomodoroSesiones">
+                    <ul class="list-unstyled small text-secondary mb-0 mt-2" id="pomodoroSesionesList">
+                      <li>Todavía no completaste sesiones hoy.</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Columna derecha: estadísticas semanales + técnica recomendada -->
+          <!-- Columna derecha: estadísticas semanales y técnica recomendada -->
           <div class="col-md-6 col-lg-4 d-flex flex-column gap-3">
 
             <div class="card shadow-sm border-0" id="estadisticas">
               <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <h3 class="h6 fw-bold mb-0">Estadísticas Semanales</h3>
-                  <select class="form-select form-select-sm w-auto" aria-label="Filtrar período">
-                    <option>Esta semana</option>
-                    <option>Semana pasada</option>
-                    <option>Este mes</option>
+                  <select class="form-select form-select-sm w-auto" id="weeklyPeriodSelect" aria-label="Filtrar período">
+                    <option value="actual" selected>Esta semana</option>
+                    <option value="anterior">Semana pasada</option>
+                    <option value="mes">Este mes</option>
                   </select>
                 </div>
 
-                <div class="weekly-chart d-flex align-items-end justify-content-between gap-2">
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:3;">
+                <div class="weekly-chart d-flex align-items-end justify-content-between gap-2" id="weeklyChartBars">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Lun" style="--valor:3;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Lun</span>
                   </div>
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:4.5;">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Mar" style="--valor:4.5;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Mar</span>
                   </div>
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:5.5;">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Mié" style="--valor:5.5;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Mié</span>
                   </div>
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:4.8;">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Jue" style="--valor:4.8;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Jue</span>
                   </div>
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:3.5;">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Vie" style="--valor:3.5;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Vie</span>
                   </div>
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:1.5;">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Sáb" style="--valor:1.5;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Sáb</span>
                   </div>
-                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" style="--valor:0.3;">
+                  <div class="weekly-chart-bar bg-primary rounded-top position-relative flex-fill" data-day="Dom" style="--valor:0.3;">
                     <span class="day-label position-absolute start-50 translate-middle-x text-secondary small">Dom</span>
                   </div>
                 </div>
+                <p class="text-secondary small text-end mb-0 mt-4 pt-1">
+                  Total: <strong id="weeklyTotalHours">23.1</strong> h
+                </p>
               </div>
             </div>
 
-            <div class="card shadow-sm border-0" id="tecnicas-estudio">
+            <div class="card shadow-sm border-0" id="tecnica-recomendada-widget">
               <div class="card-body">
                 <h3 class="h6 fw-bold mb-3">Técnica recomendada</h3>
                 <div class="d-flex gap-3">
@@ -399,7 +576,7 @@
                   <div>
                     <p class="fw-bold mb-1">Pomodoro</p>
                     <p class="text-secondary small mb-2">Ideal para mantener el enfoque y mejorar tu productividad.</p>
-                    <button class="btn btn-link btn-sm ps-0">Ver más técnicas</button>
+                    <a href="#tecnicas-estudio" class="btn btn-link btn-sm ps-0">Ver más técnicas</a>
                   </div>
                 </div>
               </div>
@@ -410,20 +587,383 @@
         </section>
 
         <!-- Asistente IA -->
+        <!-- Próximos exámenes -->
+        <section class="mb-4" id="proximos-examenes" aria-label="Próximos exámenes">
+          <h2 class="h5 fw-bold mb-3">Próximos Exámenes</h2>
+
+          <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100 js-exam-card" data-exam-date="2026-10-05">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <p class="fw-bold mb-0">Cálculo Integral</p>
+                      <p class="text-secondary small mb-0">Matemática</p>
+                    </div>
+                    <span class="badge bg-secondary-subtle text-secondary js-exam-countdown">-- días</span>
+                  </div>
+                  <p class="text-secondary small mb-3">
+                    <i class="bi bi-calendar-event"></i> 5 de octubre de 2026
+                  </p>
+
+                  <div class="d-flex justify-content-between small text-secondary mb-1">
+                    <span>Progreso de estudio</span><span>40%</span>
+                  </div>
+                  <div class="progress mb-3" style="height: 8px;">
+                    <div class="progress-bar bg-warning" style="width: 40%;"></div>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center small">
+                    <span class="text-secondary"><i class="bi bi-clock-history"></i> 8 h estudiadas</span>
+                    <span class="badge bg-primary-subtle text-primary"><i class="bi bi-diagram-3"></i> Mapas Mentales</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100 js-exam-card" data-exam-date="2026-10-15">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <p class="fw-bold mb-0">Fisiología Humana</p>
+                      <p class="text-secondary small mb-0">Biología</p>
+                    </div>
+                    <span class="badge bg-secondary-subtle text-secondary js-exam-countdown">-- días</span>
+                  </div>
+                  <p class="text-secondary small mb-3">
+                    <i class="bi bi-calendar-event"></i> 15 de octubre de 2026
+                  </p>
+
+                  <div class="d-flex justify-content-between small text-secondary mb-1">
+                    <span>Progreso de estudio</span><span>65%</span>
+                  </div>
+                  <div class="progress mb-3" style="height: 8px;">
+                    <div class="progress-bar bg-success" style="width: 65%;"></div>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center small">
+                    <span class="text-secondary"><i class="bi bi-clock-history"></i> 12 h estudiadas</span>
+                    <span class="badge bg-primary-subtle text-primary"><i class="bi bi-question-diamond"></i> Active Recall</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100 js-exam-card" data-exam-date="2026-11-02">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-start mb-2">
+                    <div>
+                      <p class="fw-bold mb-0">Historia Argentina</p>
+                      <p class="text-secondary small mb-0">Historia</p>
+                    </div>
+                    <span class="badge bg-secondary-subtle text-secondary js-exam-countdown">-- días</span>
+                  </div>
+                  <p class="text-secondary small mb-3">
+                    <i class="bi bi-calendar-event"></i> 2 de noviembre de 2026
+                  </p>
+
+                  <div class="d-flex justify-content-between small text-secondary mb-1">
+                    <span>Progreso de estudio</span><span>80%</span>
+                  </div>
+                  <div class="progress mb-3" style="height: 8px;">
+                    <div class="progress-bar bg-success" style="width: 80%;"></div>
+                  </div>
+
+                  <div class="d-flex justify-content-between align-items-center small">
+                    <span class="text-secondary"><i class="bi bi-clock-history"></i> 15 h estudiadas</span>
+                    <span class="badge bg-primary-subtle text-primary"><i class="bi bi-chat-square-text"></i> Feynman</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Mis Apuntes (completo, con filtro por materia) -->
+        <section class="card shadow-sm border-0 mb-4" id="mis-apuntes" aria-label="Todos mis apuntes">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+              <h2 class="h5 fw-bold mb-0">Mis Apuntes</h2>
+              <div class="btn-group btn-group-sm flex-wrap" role="group" aria-label="Filtrar apuntes por materia" id="notesFilterGroup">
+                <button type="button" class="btn btn-primary js-notes-filter active" data-filter="todas">Todas</button>
+                <button type="button" class="btn btn-outline-primary js-notes-filter" data-filter="Biología">Biología</button>
+                <button type="button" class="btn btn-outline-primary js-notes-filter" data-filter="Matemática">Matemática</button>
+                <button type="button" class="btn btn-outline-primary js-notes-filter" data-filter="Historia">Historia</button>
+                <button type="button" class="btn btn-outline-primary js-notes-filter" data-filter="Química">Química</button>
+                <button type="button" class="btn btn-outline-primary js-notes-filter" data-filter="Física">Física</button>
+                <button type="button" class="btn btn-outline-primary js-notes-filter" data-filter="Inglés">Inglés</button>
+              </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3" id="allNotesGrid">
+
+              <div class="col js-note-card" data-subject="Biología">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Fisiología Humana - Unidad 2</p>
+                      <p class="mb-0 text-secondary small">Biología · Subido el 21/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Matemática">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Cálculo Integral - Resumen</p>
+                      <p class="mb-0 text-secondary small">Matemática · Subido el 19/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Historia">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Historia Argentina - Siglo XIX</p>
+                      <p class="mb-0 text-secondary small">Historia · Subido el 18/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Química">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Química Orgánica - Compuestos</p>
+                      <p class="mb-0 text-secondary small">Química · Subido el 17/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Biología">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Genética Mendeliana</p>
+                      <p class="mb-0 text-secondary small">Biología · Subido el 14/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Matemática">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Álgebra Lineal - Matrices</p>
+                      <p class="mb-0 text-secondary small">Matemática · Subido el 12/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Física">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Cinemática y Dinámica</p>
+                      <p class="mb-0 text-secondary small">Física · Subido el 10/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col js-note-card" data-subject="Inglés">
+                <div class="card border-0 shadow-sm h-100">
+                  <div class="card-body d-flex gap-3 align-items-start">
+                    <span class="bg-danger-subtle text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                      <i class="bi bi-file-earmark-pdf-fill"></i>
+                    </span>
+                    <div>
+                      <p class="mb-0 fw-semibold small">Vocabulario Avanzado - Unidad 5</p>
+                      <p class="mb-0 text-secondary small">Inglés · Subido el 08/05/2024</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <p class="text-secondary small text-center mb-0 mt-3 d-none" id="allNotesEmptyState">
+              No hay apuntes para esta materia todavía.
+            </p>
+          </div>
+        </section>
+
+        <!-- ===================== PROGRESO y RITUAL ===================== -->
+        <section class="row g-3 mb-4" id="mi-progreso">
+          <div class="col-xl-8">
+            <div class="studify-journey card border-0 h-100">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                  <div>
+                    <span class="studify-eyebrow"><i class="bi bi-signpost-split"></i> TU CAMINO</span>
+                    <h2 class="h5 fw-bold mb-1">Cada sesión suma</h2>
+                    <p class="text-secondary small mb-0">Tu semana convertida en un recorrido, no solo en números.</p>
+                  </div>
+                  <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2">18.5 h</span>
+                </div>
+
+                <div class="studify-path">
+                  <div class="studify-path-line"></div>
+                  <div class="studify-path-step is-done"><span>✓</span><small>Lun</small></div>
+                  <div class="studify-path-step is-done"><span>✓</span><small>Mar</small></div>
+                  <div class="studify-path-step is-done"><span>✓</span><small>Mié</small></div>
+                  <div class="studify-path-step is-current"><span>✦</span><small>Hoy</small></div>
+                  <div class="studify-path-step"><span>○</span><small>Vie</small></div>
+                  <div class="studify-path-step"><span>○</span><small>Sáb</small></div>
+                  <div class="studify-path-step"><span>○</span><small>Dom</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="studify-growth card border-0 h-100">
+              <div class="card-body text-center">
+                <span class="studify-eyebrow">TU RITUAL</span>
+                <div class="studify-plant" aria-hidden="true">
+                  <div class="plant-spark">✦</div>
+                  <div class="plant-leaf leaf-a"></div>
+                  <div class="plant-leaf leaf-b"></div>
+                  <div class="plant-leaf leaf-c"></div>
+                  <div class="plant-stem"></div>
+                  <div class="plant-pot"></div>
+                </div>
+                <h2 class="h6 fw-bold mb-1">Tu planta está creciendo</h2>
+                <p class="text-secondary small mb-0">5 días de constancia. Volvé mañana para verla crecer.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Técnicas de Estudio -->
+        <section class="mb-4" id="tecnicas-estudio" aria-label="Técnicas de estudio">
+          <h2 class="h5 fw-bold mb-3">Técnicas de Estudio</h2>
+
+          <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                  <div class="d-flex justify-content-between align-items-start mb-3">
+                    <span class="rounded-circle bg-primary-subtle text-primary d-flex align-items-center justify-content-center flex-shrink-0" style="width:48px;height:48px;">
+                      <i class="bi bi-alarm-fill fs-5"></i>
+                    </span>
+                    <span class="badge bg-success-subtle text-success">Recomendada</span>
+                  </div>
+                  <h3 class="h6 fw-bold mb-1">Pomodoro</h3>
+                  <p class="text-secondary small mb-3">
+                    Bloques de 25 minutos de estudio enfocado seguidos de 5 de descanso.
+                    Ideal para mantener la concentración.
+                  </p>
+                  <a href="#pomodoro" class="btn btn-sm btn-primary mt-auto">Usar ahora</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                  <span class="rounded-circle bg-warning-subtle text-warning d-flex align-items-center justify-content-center flex-shrink-0 mb-3" style="width:48px;height:48px;">
+                    <i class="bi bi-chat-square-text-fill fs-5"></i>
+                  </span>
+                  <h3 class="h6 fw-bold mb-1">Feynman</h3>
+                  <p class="text-secondary small mb-3">
+                    Explicá el tema con tus propias palabras, como si se lo enseñaras a
+                    otra persona. Detectás rápido lo que todavía no entendés bien.
+                  </p>
+                  <a href="#ia-asistente" class="btn btn-sm btn-outline-primary mt-auto">Practicar con IA</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                  <span class="rounded-circle bg-info-subtle text-info d-flex align-items-center justify-content-center flex-shrink-0 mb-3" style="width:48px;height:48px;">
+                    <i class="bi bi-diagram-3-fill fs-5"></i>
+                  </span>
+                  <h3 class="h6 fw-bold mb-1">Mapas Mentales</h3>
+                  <p class="text-secondary small mb-3">
+                    Organizá visualmente los conceptos y sus relaciones, partiendo de una
+                    idea central. Útil para temas con muchas conexiones entre sí.
+                  </p>
+                  <a href="#mis-apuntes" class="btn btn-sm btn-outline-primary mt-auto">Ver mis apuntes</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card shadow-sm border-0 h-100">
+                <div class="card-body d-flex flex-column">
+                  <span class="rounded-circle bg-danger-subtle text-danger d-flex align-items-center justify-content-center flex-shrink-0 mb-3" style="width:48px;height:48px;">
+                    <i class="bi bi-question-diamond-fill fs-5"></i>
+                  </span>
+                  <h3 class="h6 fw-bold mb-1">Active Recall</h3>
+                  <p class="text-secondary small mb-3">
+                    Practicá recuperar la información desde tu memoria, con preguntas o
+                    tarjetas, en vez de releer. Mejora la retención a largo plazo.
+                  </p>
+                  <a href="#proximos-examenes" class="btn btn-sm btn-outline-primary mt-auto">Ver mis exámenes</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
         <footer class="card shadow-sm border-0" id="ia-asistente">
           <div class="card-body">
             <div class="d-flex align-items-center gap-3 mb-3">
               <span class="text-primary fs-4"><i class="bi bi-stars"></i></span>
               <div>
-                <h3 class="h6 fw-bold mb-0">Asistente IA</h3>
-                <p class="text-secondary small mb-0">Pregúntame lo que necesites sobre tus temas de estudio...</p>
+                <h3 class="h6 fw-bold mb-0">Tu copiloto de estudio</h3>
+                <p class="text-secondary small mb-0">Destrabá un tema, pedí una idea o preparate para tu próximo examen.</p>
               </div>
             </div>
 
-            <form class="input-group">
-              <label for="ai-input" class="visually-hidden">Escribí tu pregunta</label>
-              <input type="text" id="ai-input" name="ai-input" class="form-control"
-                     placeholder="Escribe tu pregunta aquí...">
+            <div class="ai-chat-log mb-3" id="aiChatLog" aria-live="polite">
+              <p class="text-secondary small text-center mb-0" id="aiChatEmptyState">
+                Escribí tu primera pregunta para empezar la conversación.
+              </p>
+            </div>
+
+            <form class="input-group" id="aiForm">
+              <label for="aiInput" class="visually-hidden">Escribí tu pregunta</label>
+              <input type="text" id="aiInput" name="ai-input" class="form-control"
+                     placeholder="Escribe tu pregunta aquí..." autocomplete="off">
               <button type="submit" class="btn btn-primary" aria-label="Enviar pregunta">
                 <i class="bi bi-send-fill"></i>
               </button>
@@ -436,7 +976,69 @@
     </div>
   </div>
 
-  <!-- Bootstrap Bundle (incluye Popper, necesario para el offcanvas) -->
+  <!-- ===================== MODO FOCO ===================== -->
+  <section class="focus-overlay" id="focusMode" aria-hidden="true">
+    <div class="focus-noise"></div>
+    <button class="focus-close js-focus-close" type="button" aria-label="Salir del modo foco">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+    <div class="focus-content">
+      <span class="studify-eyebrow">✦ MODO FOCO</span>
+      <p class="focus-subject">PROGRAMACIÓN</p>
+      <h2>Ahora solo importa esto.</h2>
+      <p class="focus-task">Terminar el TP integrador</p>
+
+      <div class="focus-timer">
+        <span id="focusTime">25:00</span>
+        <div class="focus-progress"><span></span></div>
+      </div>
+
+      <div class="focus-actions">
+        <button class="btn btn-light btn-lg js-focus-timer"><i class="bi bi-play-fill"></i> Empezar sesión</button>
+        <button class="btn btn-outline-light btn-lg js-focus-close">Volver al escritorio</button>
+      </div>
+
+      <div class="focus-quote">
+        <i class="bi bi-quote"></i>
+        Un bloque de foco. Un paso más cerca.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== MODAL: NUEVO APUNTE ===================== -->
+  <div class="modal fade" id="modalNuevoApunte" tabindex="-1" aria-labelledby="modalNuevoApunteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <form id="formNuevoApunte">
+          <div class="modal-header">
+            <h2 class="modal-title h5" id="modalNuevoApunteLabel">Nuevo apunte</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="apunteTitulo" class="form-label">Título</label>
+              <input type="text" class="form-control" id="apunteTitulo" required
+                     placeholder="Ej: Termodinámica - Unidad 3">
+            </div>
+            <div class="mb-3">
+              <label for="apunteMateria" class="form-label">Materia</label>
+              <input type="text" class="form-control" id="apunteMateria" required
+                     placeholder="Ej: Física">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check-lg"></i> Guardar apunte
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle (incluye Popper, necesario para dropdown/offcanvas/modal) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/script.js"></script>
 </body>
